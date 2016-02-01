@@ -5,7 +5,7 @@
 <form action="/teampicker" method="POST">
 	
 	<div>
-		<textarea name="list" cols="50" rows="10"></textarea><br>
+		<textarea name="list" cols="50" rows="10" required autofocus></textarea><br>
 	</div>
 
 	<div>
@@ -24,3 +24,15 @@
 </form>
 
 
+<% if @result.class == Array %>
+	<% @result.each do|arr| %>
+		<h3>Team</h3>
+		<ul>
+			<% arr.each do |name| %>
+			<li><%= name %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<% else %>
+	<%=  @result %>
+<% end %>
