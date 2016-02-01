@@ -1,7 +1,7 @@
  
 # team-randomizer
  
-Simple Sinatra application for dividing up individuals into sets of teams
+Simple single page Sinatra application for dividing up individuals into sets of teams
  
 ### Instructions
 

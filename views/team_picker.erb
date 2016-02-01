@@ -1,0 +1,26 @@
+
+
+<h1>Randomizer!</h1>
+
+<form action="/teampicker" method="POST">
+	
+	<div>
+		<textarea name="list" cols="50" rows="10"></textarea><br>
+	</div>
+
+	<div>
+		<label for="">Method</label>
+		<input type="radio" name="method" value="num_of_team"> Team count
+		<input type="radio" name="method" value="num_per_team"> Number per team
+	</div>
+
+	<div>
+		<label for="number">Number</label><br>
+		<input type="text" id="number" name="number">
+	</div>
+
+	<input type="submit" value="Lets random">
+
+</form>
+
+
