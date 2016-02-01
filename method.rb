@@ -22,7 +22,7 @@ class Split
 			#[["eight"], ["nine"], ["ten"]]
 
 			i = 0
-
+			
 			left_over.size.times do
 
 				correct_teams[i] << left_over.pop
