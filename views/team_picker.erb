@@ -1,38 +1,47 @@
 
+<div id="container">
 
-<h1>Randomizer!</h1>
+	<h1>Randomizer!</h1>
 
-<form action="/teampicker" method="POST">
-	
-	<div>
-		<textarea name="list" cols="50" rows="10" autofocus><% if session[:string_of_names] %><%= session[:string_of_names].strip %><% end %></textarea><br>
-	</div>
+	<form action="/teampicker" method="POST">
+		
+		<div>
+			<textarea name="list" cols="50" rows="10" autofocus><% if session[:string_of_names] %><%= session[:string_of_names].strip %><% end %></textarea><br>
+		</div>
 
-	<div>
-		<label for="">Method</label>
-		<input type="radio" name="method" value="num_of_team" <% if session[:method]%> <%= "checked" %> <% end %> > Team count
-		<input type="radio" name="method" value="num_per_team" <% if session[:method]%> <%= "checked" %> <% end %> > Number per team
-	</div>
+		<div>
+			<label for="">Method</label>
+			<input type="radio" name="method" value="num_of_team" <% if session[:method] == "num_of_team" %> <%= "checked" %> <% end %> > Team count
+			<input type="radio" name="method" value="num_per_team" <% if session[:method] == "num_per_team" %> <%= "checked" %> <% end %> > Number per team
+		</div>
 
-	<div>
-		<label for="number">Number</label><br>
-		<input type="text" id="number" name="number" value= <% if session[:number]%> <%= session[:number] %> <% end %> >
-	</div>
+		<div>
+			<label for="number">Number</label><br>
+			<input type="text" id="number" name="number" value= <% if session[:number]%> <%= session[:number] %> <% end %> >
+		</div>
 
-	<input type="submit" value="Lets random">
+		<input type="submit" value="Lets random">
 
-</form>
+	</form>
 
 
-<% if session[:result].class == Array %>
-	<% session[:result].each do|arr| %>
-		<h3>Team</h3>
-		<ul>
-			<% arr.each do |name| %>
-			<li><%= name %></li>
+	<% if @error.nil? %> 
+
+		<% if session[:result].class == Array %>
+			<% session[:result].each do|arr| %>
+				<h3>Team</h3>
+				<ul>
+					<% arr.each do |name| %>
+					<li><%= name %></li>
+					<% end %>
+				</ul>
 			<% end %>
-		</ul>
-	<% end %>
+			<% else %>
+			<%=  session[:result] %>
+		<% end %>
+
 	<% else %>
-	<%=  session[:result] %>
-<% end %>
+		<p class="error"><%= @error %></p>
+	<% end %>
+
+</div>

@@ -32,17 +32,27 @@ class Split
 
 
 
-
 	def self.num_per_team(group_array, divide_by_num)
 
 		
 		if(group_array.length % divide_by_num != 0)
 
-			until group_array.size % divide_by_num == 0
-				divide_by_num -= 1
+			num_of_teams = (group_array.length / divide_by_num.to_f).ceil #2
+			final_teams = (divide_by_num / num_of_teams) #3
+
+		  team_array = group_array.each_slice(final_teams).to_a
+
+		  correct_teams = team_array[0, team_array.length - 1]
+			left_over = team_array.last.flatten	
+			
+			i = 0
+
+			left_over.size.times do
+				correct_teams[i] << left_over.pop
+				i += 1
 			end
 
-			group_array.each_slice(divide_by_num).to_a
+			correct_teams
 
 		else 
 
@@ -53,6 +63,5 @@ class Split
 	end # End num_per_team
 
 
-	
-
 end
+
