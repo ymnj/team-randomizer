@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require './method.rb'
 
+enable :sessions
 
 
 get '/teampicker' do 
@@ -13,24 +14,26 @@ end
 
 post '/teampicker' do 
 
-	@name_list = params[:list]
-	@arr_of_names = @name_list.split( /,\s*/ )
+
+	session[:arr_of_names] = params[:list].split( /,\s*/ )
 	#returns an array of names split/shuffled
+	session[:string_of_names] = session[:arr_of_names].join(", ")
 
-	@method = params[:method]	##divide by team or individials per team
-	@number = params[:number].to_i #number to be divided by
+	session[:method] = params[:method]	##divide by team or individials per team
+	session[:number] = params[:number].to_i #number to be divided by
 
-	if(@method == "num_of_team")
+	if(session[:method] == "num_of_team")
 
-		@result = Split.divide_by_team(@arr_of_names.shuffle, @number)
+		session[:result] = Split.divide_by_team(session[:arr_of_names].shuffle, session[:number])
 
-	else (@method == "num_per_team")
+	else (session[:method] == "num_per_team")
 
-		@result = Split.num_per_team(@arr_of_names.shuffle, @number)
+		session[:result] = Split.num_per_team(session[:arr_of_names].shuffle, session[:number])
 
 	end
 
-	p @result
+	p session[:result]
+	p session[:string_of_names]
 	
 	erb :team_picker, layout: :app_layout
 

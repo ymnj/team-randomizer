@@ -5,18 +5,18 @@
 <form action="/teampicker" method="POST">
 	
 	<div>
-		<textarea name="list" cols="50" rows="10" required autofocus></textarea><br>
+		<textarea name="list" cols="50" rows="10" autofocus><% if session[:string_of_names] %><%= session[:string_of_names].strip %><% end %></textarea><br>
 	</div>
 
 	<div>
 		<label for="">Method</label>
-		<input type="radio" name="method" value="num_of_team"> Team count
-		<input type="radio" name="method" value="num_per_team"> Number per team
+		<input type="radio" name="method" value="num_of_team" <% if session[:method]%> <%= "checked" %> <% end %> > Team count
+		<input type="radio" name="method" value="num_per_team" <% if session[:method]%> <%= "checked" %> <% end %> > Number per team
 	</div>
 
 	<div>
 		<label for="number">Number</label><br>
-		<input type="text" id="number" name="number">
+		<input type="text" id="number" name="number" value= <% if session[:number]%> <%= session[:number] %> <% end %> >
 	</div>
 
 	<input type="submit" value="Lets random">
@@ -24,8 +24,8 @@
 </form>
 
 
-<% if @result.class == Array %>
-	<% @result.each do|arr| %>
+<% if session[:result].class == Array %>
+	<% session[:result].each do|arr| %>
 		<h3>Team</h3>
 		<ul>
 			<% arr.each do |name| %>
@@ -34,5 +34,5 @@
 		</ul>
 	<% end %>
 	<% else %>
-	<%=  @result %>
+	<%=  session[:result] %>
 <% end %>
